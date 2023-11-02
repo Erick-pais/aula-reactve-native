@@ -49,8 +49,8 @@ export const Home = () => {
             <TextInput  placeholder="seu endereço.." style={styles.TextInput} onChangeText={text=>setend(text)}/> 
             <TextInput  placeholder="seu telefone.." style={styles.TextInput} onChangeText={text=>setTel(text)}/> 
 
-            <TouchableOpacity onPress={()=>cadastro()}>
-                <Text>Cadastrar</Text>
+            <TouchableOpacity style={styles.btnCadastro} onPress={()=>cadastro()}>
+                <Text style={{color:'white',textAlign:'center'}}>Cadastrar</Text>
             </TouchableOpacity>
 
           
@@ -69,6 +69,14 @@ const styles = StyleSheet.create({
         paddingLeft:15,
         marginBottom:20,
     },
+    btnCadastro:{
+        width:'100%',
+        height:40,
+        backgroundColor:'green',
+        borderRadius:20,
+        justifyContent:"center"
+        
+    },
     container: {
       flex: 1,
       backgroundColor: '#121214',
@@ -82,6 +90,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
         paddingTop: 15,
+        marginBottom:20,
     }
  
   });
