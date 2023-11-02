@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
     StyleSheet, 
     Text, 
     TextInput, 
     View, 
-    TouchableOpacity, 
-    ScrollView,
-    FlatList
+    TouchableOpacity
 } from "react-native";
 
 interface Tarefa {
@@ -15,101 +14,75 @@ interface Tarefa {
 }
 
 export const Home = () => {
+    
+    const [tarefas, setTarefas] = React.useState<Tarefa[]>([]); 
+    const [nome, setNome] = useState('');
+    const [rg, setRG] = useState('');
+    const [cpf, setCPF] = useState('');
+    const [email, setemail] = useState('');
+    const [end, setend] = useState('');
+    const [tel, setTel] = useState('');
+    
 
     {/*[] - array*/}
-    const [newTask, setNewTask] = React.useState('');
-    const [tarefas, setTarefas] = React.useState<Tarefa[]>([]);      
+    const cadastro = () => {
+        alert(nome);
+        alert(rg);
+        alert(cpf);
+        alert(email);
+        alert(end);
+        alert(tel);
+    }
+        
 
-        const adcTarefa = () => {
-            const dados = {
-                    id: String(new Date().getTime()),
-                    title: newTask ? newTask : 'Registro vazio',
-                };
-                setTarefas([...tarefas, dados]);
-                setNewTask("");
-            };
-        const removerTarefa = (id: string) => {
-            const tarefasAtualizadas = tarefas.filter((tarefa) =>
-            tarefa.id != id );
-            setTarefas(tarefasAtualizadas);
-        }
         
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Tarefas do dia</Text>
-            <TextInput onChangeText={setNewTask} value={newTask} placeholderTextColor='#555' placeholder="Tarefas" style={styles.fields} />
-            <TouchableOpacity onPress={adcTarefa} activeOpacity={0.7} style={styles.button}>
-                <Text style={styles.buttonText}>Entrar</Text>
+            
+            
+            <Text style={styles.title}>dados cliente</Text>
+            <TextInput  placeholder="seu nome.." style={styles.TextInput} onChangeText={text=>setNome(text)}/> 
+            <TextInput  placeholder="seu rg.." style={styles.TextInput} onChangeText={text=>setRG(text)}/> 
+            <TextInput  placeholder="seu cpf.." style={styles.TextInput} onChangeText={text=>setCPF(text)}/> 
+            <TextInput  placeholder="seu email.." style={styles.TextInput} onChangeText={text=>setemail(text)}/> 
+            <TextInput  placeholder="seu endereço.." style={styles.TextInput} onChangeText={text=>setend(text)}/> 
+            <TextInput  placeholder="seu telefone.." style={styles.TextInput} onChangeText={text=>setTel(text)}/> 
+
+            <TouchableOpacity onPress={()=>cadastro()}>
+                <Text>Cadastrar</Text>
             </TouchableOpacity>
-            <Text style={styles.title}>Lista de tarefas</Text>
 
-            {/*Scrollbar*/}
-            {/*<ScrollView>
-                {tarefas.map((tarefa : Tarefa) => (
-                    <TouchableOpacity key={tarefa.id}>
-                        <Text style={styles.buttonText}>{tarefa.title}</Text>
-                    </TouchableOpacity>
-                ))}
-                </ScrollView>*/}
-
-            <FlatList
-                data={tarefas}
-                keyExtractor={(item: Tarefa) => item.id}
-                renderItem={({item} : {item: Tarefa}) => (
-                    <TouchableOpacity 
-                    onPress={() => removerTarefa(item.id)}
-                    style={styles.renderList}>
-                        <Text style={styles.buttonText}>{item.title}</Text>
-                    </TouchableOpacity>
-                )}
-            />
+          
+            
 
         </View>
     );
 }; 
 
 const styles = StyleSheet.create({
+    TextInput:{
+        width:'100%',
+        height:40,
+        backgroundColor:'white',
+        borderRadius:20,
+        paddingLeft:15,
+        marginBottom:20,
+    },
     container: {
       flex: 1,
       backgroundColor: '#121214',
+      padding:20,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    renderList:{
-        backgroundColor: 'green',
-        padding: 10,
-        marginTop: 10 , 
-        borderRadius: 50,
-        alignItems: 'center',
-    },
+  
     title: {
         color: '#f1f1f1',
         fontWeight: 'bold',
         fontSize: 15,
         paddingTop: 15,
-    },
-    fields: {
-        backgroundColor: '#29292e',
-        color: '#f1f1f1',
-        fontSize: 18,
-        padding: 15,
-        marginTop: 30,
-        borderRadius: 7,
-        width: 300,
-        alignItems: 'center',
-    },
-    button: {
-        backgroundColor: 'rgb(192, 192, 192)',
-        padding: 15,
-        borderRadius: 7,
-        alignItems: 'center',
-        marginTop: 20,
-        width: 300,
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 15,
     }
+ 
   });
   
